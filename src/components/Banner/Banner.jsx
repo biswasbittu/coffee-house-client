@@ -36,22 +36,22 @@ const Banner = () => {
                  <div className='max-w-7xl mx-auto flex flex-col md:flex-row justify-center items-center md:justify-between px-2 '>
                     <div className='py-4 space-y-2 '>
                          <img src={i1} alt="" />
-                         <h1 className='text-4xl font-rancho'>Awesome Aroma</h1>
+                         <h1 className='text-4xl font-rancho text-primary'>Awesome Aroma</h1>
                          <p>You will definitely be a fan of the design & aroma of your coffee</p>
                     </div>
                     <div className='py-4 space-y-2'>
                          <img src={i2} alt="" />
-                         <h1 className='text-4xl font-rancho'>High Quality</h1>
+                         <h1 className='text-4xl font-rancho text-primary'>High Quality</h1>
                          <p>You will definitely be a fan of the design & aroma of your coffee</p>
                     </div>
                     <div className='py-4 space-y-2'>
                          <img src={i3} alt="" />
-                         <h1 className='text-4xl font-rancho'>Pure Grades</h1>
+                         <h1 className='text-4xl font-rancho text-primary'>Pure Grades</h1>
                          <p>You will definitely be a fan of the design & aroma of your coffee</p>
                     </div>
                     <div className='py-4 space-y-2'>
                          <img src={i4} alt="" />
-                         <h1 className='text-4xl font-rancho'>Proper Roasting</h1>
+                         <h1 className='text-4xl font-rancho text-primary'>Proper Roasting</h1>
                          <p>You will definitely be a fan of the design & aroma of your coffee</p>
                     </div>
                  </div>
