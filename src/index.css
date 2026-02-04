@@ -14,11 +14,11 @@
 
 @layer utilities {
     .font-rancho {
-        font-family: 'Rancho', cursive;
+        font-family: 'rancho', cursive;
     }
 
     .font-raleway {
-        font-family: 'Raleway', sans-serif;
+        font-family: 'raleway', sans-serif;
     }
 }
 

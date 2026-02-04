@@ -1,16 +1,51 @@
 import React from 'react';
+import { FaEye } from 'react-icons/fa';
+import { MdDelete, MdEdit } from 'react-icons/md';
+import { Link } from 'react-router';
+import Swal from 'sweetalert2';
 
-const Coffeecard = ({coffee}) => {
-    console.log(coffee) 
-    const { name, quntity, supplier, taste, photo } = coffee;
+const Coffeecard = ({ coffee }) => {
+    // console.log(coffee) 
+    const { _id, name, quntity, supplier, taste, photo } = coffee;
+
+
+    const handleDeleteCoffee = (id) => {
+
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+            // console.log(result.isConfirmed)
+            if (result.isConfirmed) {
+                fetch(`http://localhost:3000/coffees/${id}`, {
+                    method: 'DELETE'
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        // console.log('after delete', data)
+                        if (data.deletedCount) {
+                            Swal.fire({
+                                title: "Deleted!",
+                                text: "Your file has been deleted.",
+                                icon: "success"
+                            });
+                        }
+                    })
+
+
+            }
+        });
+    }
+
     return (
         <div className=''>
 
-            {/* <div>
-                <p className='font-raleway'>--- Sip & Savor ---</p>
-                <h1 className='font-bold font-rancho text-6xl text-primary'>Our Popular Products</h1>
-                <Link>Add Coffee</Link>
-            </div> */}
+
             <div className="card card-side  shadow-xl p-4 border border-gray-200 bg-[#f5f4f1] ">
 
                 {/* --- Image Section --- */}
@@ -38,9 +73,12 @@ const Coffeecard = ({coffee}) => {
                     {/* --- Action Buttons (Right Side) --- */}
                     {/* btn-group লম্বালম্বি দেখানোর জন্য join-vertical ব্যবহার করা হয়েছে */}
                     <div className="join join-vertical space-y-2">
-                        <button className="btn join-item btn-neutral text-white">View</button>
-                        <button className="btn join-item btn-primary text-white">Edit</button>
-                        <button className="btn join-item btn-error text-white">X</button>
+                        <Link to={`/coffee/${_id}`}>
+                            <button className="btn border-0 join-item  rounded-lg  bg-[#D2B48C] text-white"><FaEye size={24} className='' /></button>
+
+                        </Link>
+                        <button className="btn join-item  rounded-lg bg-[#3C393B] text-white"><MdEdit size={24} /></button>
+                        <button onClick={() => handleDeleteCoffee(_id)} className="btn join-item bg-[#EA4744] rounded-lg text-white"><MdDelete size={24} /></button>
                     </div>
                 </div>
             </div>
