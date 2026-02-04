@@ -1,8 +1,45 @@
 import React from 'react';
-import { GoArrowLeft, GoArrowUpLeft } from 'react-icons/go';
+import { GoArrowLeft, } from 'react-icons/go';
 import { Link } from 'react-router';
+import Swal from 'sweetalert2';
 
 const Addcoffee = () => {
+
+    const handleAddCoffee = e => {
+        e.preventDefault()
+        const form = e.target;
+        const formData = new FormData(form);
+        const newCoffee = Object.fromEntries(formData.entries())
+        // console.log(newCoffee)
+
+
+        // send data to DB
+
+        fetch('http://localhost:3000/coffees', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(newCoffee)
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+                if (data.insertedId) {
+                    Swal.fire({
+                        // position: "top-end",
+                        icon: "success",
+                        title: "Coffee Added Succefully",
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                }
+
+            }).catch(error => console.log(error.message))
+
+
+    }
+
     return (
         <div>
             <div className='mt-5'>
@@ -14,20 +51,20 @@ const Addcoffee = () => {
                     It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using Content here.
                 </p>
 
-                <form>
+                <form onSubmit={handleAddCoffee}>
                     {/* Row 1: Name and Chef */}
                     <div className="md:flex gap-4 mb-4">
                         <div className="form-control md:w-1/2">
                             <label className="label">
                                 <span className="label-text font-raleway font-semibold text-lg">Name</span>
                             </label>
-                            <input type="text" name="name" placeholder="Enter coffee name" className="input input-bordered w-full font-raleway" />
+                            <input type="text" name="name" placeholder="Enter coffee name" required className="input input-bordered w-full font-raleway" />
                         </div>
                         <div className="form-control md:w-1/2">
                             <label className="label">
-                                <span className="label-text font-raleway font-semibold text-lg">Chef</span>
+                                <span className="label-text font-raleway font-semibold text-lg">Quintity</span>
                             </label>
-                            <input type="text" name="chef" placeholder="Enter coffee chef" className="input input-bordered w-full font-raleway" />
+                            <input type="text" name="quntity" placeholder=" quantity" required  className="input input-bordered w-full font-raleway" />
                         </div>
                     </div>
 
@@ -37,13 +74,13 @@ const Addcoffee = () => {
                             <label className="label">
                                 <span className="label-text font-raleway font-semibold text-lg">Supplier</span>
                             </label>
-                            <input type="text" name="supplier" placeholder="Enter coffee supplier" className="input input-bordered w-full font-raleway" />
+                            <input type="text" name="supplier" placeholder="Enter coffee supplier" required  className="input input-bordered w-full font-raleway" />
                         </div>
                         <div className="form-control md:w-1/2">
                             <label className="label">
                                 <span className="label-text font-raleway font-semibold text-lg">Taste</span>
                             </label>
-                            <input type="text" name="taste" placeholder="Enter coffee taste" className="input input-bordered w-full font-raleway" />
+                            <input type="text" name="taste" placeholder="Enter coffee taste" required  className="input input-bordered w-full font-raleway" />
                         </div>
                     </div>
 
@@ -51,15 +88,15 @@ const Addcoffee = () => {
                     <div className="md:flex gap-4 mb-4">
                         <div className="form-control md:w-1/2">
                             <label className="label">
-                                <span className="label-text font-raleway font-semibold text-lg">Category</span>
+                                <span className="label-text font-raleway font-semibold text-lg">Price</span>
                             </label>
-                            <input type="text" name="category" placeholder="Enter coffee category" className="input input-bordered w-full font-raleway" />
+                            <input type="text" name="price" placeholder="Enter coffee Price" required  className="input input-bordered w-full font-raleway" />
                         </div>
                         <div className="form-control md:w-1/2">
                             <label className="label">
                                 <span className="label-text font-raleway font-semibold text-lg">Details</span>
                             </label>
-                            <input type="text" name="details" placeholder="Enter coffee details" className="input input-bordered w-full font-raleway" />
+                            <input type="text" name="details" placeholder="Enter coffee details" required  className="input input-bordered w-full font-raleway" />
                         </div>
                     </div>
 
@@ -69,12 +106,14 @@ const Addcoffee = () => {
                             <label className="label">
                                 <span className="label-text font-raleway font-semibold text-lg">Photo</span>
                             </label>
-                            <input type="text" name="photo" placeholder="Enter photo URL" className="input input-bordered w-full font-raleway" />
+                            <input type="text" name="photo" placeholder="Enter photo URL" required  className="input input-bordered w-full font-raleway" />
                         </div>
                     </div>
 
                     {/* Submit Button */}
-                    <input type="submit" value="Add Coffee" className="btn btn-block bg-[#D2B48C] hover:bg-[#b89568] font-rancho text-xl border-2 border-[#331A15] text-[#331A15]" />
+                    <input type="submit" value="Add Coffee" className="btn btn-block
+                     bg-[#D2B48C] hover:bg-[#b89568] font-rancho 
+                     text-xl border-2 border-primary text-primary" />
                 </form>
             </div>
         </div>
