@@ -4,7 +4,7 @@ import { MdDelete, MdEdit } from 'react-icons/md';
 import { Link } from 'react-router';
 import Swal from 'sweetalert2';
 
-const Coffeecard = ({ coffee }) => {
+const Coffeecard = ({ coffee,coffees,setCoffees }) => {
     // console.log(coffee) 
     const { _id, name, quntity, supplier, taste, photo } = coffee;
 
@@ -34,6 +34,9 @@ const Coffeecard = ({ coffee }) => {
                                 text: "Your file has been deleted.",
                                 icon: "success"
                             });
+
+                            const remaingCoffees= coffees.filter(cof=>cof._id !== id)
+                            setCoffees(remaingCoffees)
                         }
                     })
 
@@ -73,11 +76,11 @@ const Coffeecard = ({ coffee }) => {
                     {/* --- Action Buttons (Right Side) --- */}
                     {/* btn-group লম্বালম্বি দেখানোর জন্য join-vertical ব্যবহার করা হয়েছে */}
                     <div className="join join-vertical space-y-2">
-                        <Link to={`/coffee/${_id}`}>
+                        <Link to={`/coffees/${_id}`}>
                             <button className="btn border-0 join-item  rounded-lg  bg-[#D2B48C] text-white"><FaEye size={24} className='' /></button>
 
                         </Link>
-                        <button className="btn join-item  rounded-lg bg-[#3C393B] text-white"><MdEdit size={24} /></button>
+                        <Link to={`/updatecoffee/${_id}`}><button className="btn join-item  rounded-lg bg-[#3C393B] text-white"><MdEdit size={24} /></button></Link>
                         <button onClick={() => handleDeleteCoffee(_id)} className="btn join-item bg-[#EA4744] rounded-lg text-white"><MdDelete size={24} /></button>
                     </div>
                 </div>

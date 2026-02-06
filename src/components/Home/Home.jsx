@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Banner from '../Banner/Banner';
 import Followinsta from '../Followinsta/Followinsta';
 import { Link, useLoaderData } from 'react-router';
@@ -9,7 +9,9 @@ import { BsCup } from 'react-icons/bs';
 
 
 const Home = () => {
-    const coffees = useLoaderData();
+    const initialCoffees = useLoaderData();
+
+    const [coffees,setCoffees]=useState(initialCoffees);
     // console.log(coffees)
     return (
         <div>
@@ -23,7 +25,7 @@ const Home = () => {
                 </div>
                 <div className='grid grid-cols-1 md:grid-cols-2 gap-4 max-w-7xl mx-auto px-4 pt-5 md:pt-16'>
                     {
-                        coffees.map(coffee => <Coffeecard key={coffee._id} coffee={coffee}></Coffeecard>)
+                        coffees.map(coffee => <Coffeecard key={coffee._id} coffees={coffees} setCoffees={setCoffees}  coffee={coffee}></Coffeecard>)
                     }
                 </div>
             </div>
